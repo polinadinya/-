@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+
+void main()
+{
+setlocale(LC_ALL, "Rus");
+srand(time(NULL));
+int* Arr;
+int x, y, sum = 0;
+printf("Введите длину массива: ");
+scanf("%d", &y);
+printf("Введите ширину массива: ");
+scanf("%d", &x);
+Arr = (int*)malloc(x * y * sizeof(int));
+for (int i = 0; i < x; i++) {
+for (int j = 0; j < y; j++) {
+*(Arr + i * y + j) = rand() % 100;
+printf("%3d ",*(Arr + i * y + j));
+}
+printf("\n");
+}
+for (int i = 0; i < x; i++) {
+for (int j = 0; j < y; j++)
+sum += *(Arr + i * y + j);
+printf("\nСумма чисел в строке: %d", sum);
+sum = 0;
+}
+printf("\n");
+for (int i = 0; i < y; i++) {
+for (int j = 0; j < x; j++)
+sum += *(Arr + j * y + i);
+printf("\nСумма чисел в столбце: %d", sum);
+sum = 0;
+}
+printf("\n");
+free (Arr);
+}
