@@ -1,0 +1,41 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <windows.h>
+#include <locale.h>
+
+void main() {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	setlocale(LC_ALL, "Rus");
+	struct student {
+		char familya[20], name[20], facultet[20];
+		int n;
+	} stud[3], tofind;
+	for (int i = 0; i < 3; i++)
+	{
+		printf("\nВведите фамилию студента: ");
+		scanf_s("%s", &stud[i].familya, 20);
+		printf("Введите имя студента: ");
+		scanf_s("%s", &stud[i].name, 20);
+		printf("Введите название факультета студента: ");
+		scanf_s("%s", &stud[i].facultet, 20);
+		printf("Введите номер зачетной книжки студента: ");
+		scanf_s("%d", &stud[i].n, 20);
+	}
+	system("cls");
+	printf("Введите фамилию, имя и факультет студента:\n");
+	scanf_s("%s", &tofind.familya, 20);
+	scanf_s("%s", &tofind.name, 20);
+	scanf_s("%s", &tofind.facultet, 20);
+	for (int i = 0; i < 3; i++) {
+		if ((strcmp(tofind.familya, stud[i].familya) == 0) && ((strcmp(tofind.name, stud[i].name) == 0) || (strcmp(tofind.facultet, stud[i].facultet) == 0)))
+		{
+			printf("\n%s %s %s %d\n", stud[i].familya, stud[i].name, stud[i].facultet, stud[i].n);
+		}
+		else if ((strcmp(tofind.name, stud[i].name) == 0) && (strcmp(tofind.facultet, stud[i].facultet) == 0))
+		{
+			printf("\n%s %s %s %d\n", stud[i].familya, stud[i].name, stud[i].facultet, stud[i].n);
+		}
+	}
+}
