@@ -1,0 +1,51 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+
+void main() {
+	setlocale(LC_ALL, "Rus");
+	srand(time(NULL));
+	int min, max, n = 0;
+	printf("Введите размер массива: ");
+	scanf("%d", &n);
+	int* Arr = (int*)malloc(n * sizeof(int));
+	int sump = 0;
+	if (n >= 101) {
+		for (int i = 0; i < n; i++) {
+			if (sump < 100) {
+				Arr[i] = rand() % 3;
+			}
+			else {
+				sump -= Arr[i - 1];
+				Arr[i - 1] = 0;
+				Arr[i] = rand() % (100 - sump);
+			}
+			sump += Arr[i];
+		}
+		Arr[n - 1] = 0;
+	}
+	else {
+		int x = 100 / n;
+		for (int i = 0; i < n; i++) {
+			Arr[i] = rand() % (x + 1);
+		}
+	}
+	min = Arr[0];
+	max = Arr[0];
+	for (int i = 0; i < n; i++) {
+		if (Arr[i] > max)
+			max = Arr[i];
+		if (Arr[i] < min)
+			min = Arr[i];
+	}
+	for (int i = 0; i < n; i++) {
+		printf("%d ", Arr[i]);
+	}
+	printf("\n\nМинимальный элемент: %d", min);
+	printf("\nМаксимальный элемент: %d\n", max);
+	printf("\nРазница между максимальным и минимальным элементами массива: %d\n", max - min);
+	free(Arr);
+	getchar();
+}
